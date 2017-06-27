@@ -1,7 +1,5 @@
 
 var Trello = require("node-trello");
-// ADB trello token:   94bb848185b6cbcdf69367850bc38df61903d14482feed30fce38b24ef4acb7f
-// ADB app key: 1d14d1422d281ee160b3780ed02e8432
 
 // USED TO KEEP TRACK OF ASYNC PROGRESS - A NEW FAVORITE
 var _ = require("lodash");
