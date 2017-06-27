@@ -7,6 +7,7 @@ var fs = require("fs");
 var path = require("path");
 var boardIds= ['mlDV9CQ8','UYFU40tt','MmDAQYPQ'];
 var dsv = require('d3-dsv');
+var xlsx = require('xlsx');
 var authData = JSON.parse(fs.readFileSync("./auth.json"));
 var t = new Trello(authData.key, authData.token);
 // After the first two steps are done, this will
@@ -102,7 +103,11 @@ function stepTwo(){
 /**********************************************************
 ** PART THREE *********************************************
 **********************************************************/
-
+function stepThree(){
+    
+    
+    
+}
 // EXCEL sheet manipulation read the file or open it to edit
 
 // decide which columns will be updated
