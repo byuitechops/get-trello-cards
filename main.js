@@ -13,7 +13,8 @@ var t = new Trello(authData.key, authData.token);
 // trigger the final step, which is updating the
 // Excel sheet with the data from the newly created
 // CSV files.
-// UNCOMMENT WHEN STEP 3 WRITTEN
+
+// UNCOMMENT WHEN STEP 3 WRITTEN:
 //var stepTwoDone = _.after(boardIds.length, stepThree);
 
 /**********************************************************
@@ -32,34 +33,34 @@ _.forEach(boardIds, function(boardId){
     var stepOneDone = _.after(4, stepTwo);
     
     
-t.get("/1/boards/" + boardId + "/name" , function(err, data) {
-  if (err) throw err;
-   board = data._value;
-    stepOneDone();
-    //fs.writeFile("boards/board_" + 0 + "_listcards.json", JSON.stringify(data), function(err){if (err) throw err})
-});    
-    
-t.get("/1/boards/" + boardId + "/cards?fields=name,url,idMembers,idList,closed" , function(err, data) {
-  if (err) throw err;
-   cards = data;
-    stepOneDone();
-    //fs.writeFile("boards/board_" + 0 + "_listcards.json", JSON.stringify(data), function(err){if (err) throw err})
-});
+    t.get("/1/boards/" + boardId + "/name" , function(err, data) {
+      if (err) throw err;
+       board = data._value;
+        stepOneDone();
+        //fs.writeFile("boards/board_" + 0 + "_listcards.json", JSON.stringify(data), function(err){if (err) throw err})
+    });    
+
+    t.get("/1/boards/" + boardId + "/cards?fields=name,url,idMembers,idList,closed" , function(err, data) {
+      if (err) throw err;
+       cards = data;
+        stepOneDone();
+        //fs.writeFile("boards/board_" + 0 + "_listcards.json", JSON.stringify(data), function(err){if (err) throw err})
+    });
 
 
-t.get("/1/boards/" + boardId + "/lists?fields=id,name" , function(err, data) {
-  if (err) throw err;
-   lists = data;
-    stepOneDone();
-    //fs.writeFile("boards/board_" + 0 + "_listcards.json", JSON.stringify(data), function(err){if (err) throw err})
-});
+    t.get("/1/boards/" + boardId + "/lists?fields=id,name" , function(err, data) {
+      if (err) throw err;
+       lists = data;
+        stepOneDone();
+        //fs.writeFile("boards/board_" + 0 + "_listcards.json", JSON.stringify(data), function(err){if (err) throw err})
+    });
 
-// SAVE MEMBER IDS/NAMES TO JSON
-t.get("/1/boards/" + boardId + "/members" , function(err, data) {
-  if (err) throw err;
-   members = data;
-    stepOneDone();
-    //fs.writeFile("boards/board_" + 0 + "_members.json", JSON.stringify(data), function(err){if (err) throw err})
+    // SAVE MEMBER IDS/NAMES TO JSON
+    t.get("/1/boards/" + boardId + "/members" , function(err, data) {
+      if (err) throw err;
+       members = data;
+        stepOneDone();
+        //fs.writeFile("boards/board_" + 0 + "_members.json", JSON.stringify(data), function(err){if (err) throw err})
 });
 
 
@@ -96,6 +97,8 @@ function stepTwo(){
 } 
 
 });
+
+
 /**********************************************************
 ** PART THREE *********************************************
 **********************************************************/
