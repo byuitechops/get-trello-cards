@@ -11,7 +11,6 @@ var xlsx = require('xlsx');
  **********************************************************/
 var workbook = xlsx.readFile("./source.xlsx");
 var settings = workbook.Sheets['settings'];
-console.log(settings);
 settings = xlsx.utils.sheet_to_json(settings);
 
 // FIRST ROW OF SETTINGS: KEY, SECOND ROW: TOKEN
