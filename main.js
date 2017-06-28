@@ -106,8 +106,6 @@ _.forEach(boardIds, function (boardId) {
             // ADD TO "ALLCARDS" LIST
             allcards.push(card);
         })
-
-
         //CSV OUTPUT
         //cardFile = (dsv.csvFormat(cards, ['id', 'name', 'idList', 'closed', 'url', 'idMembers','idBoard']));
         //fs.writeFileSync('./boards/'+board+'.csv', cardFile);
@@ -132,7 +130,7 @@ function stepThree() {
     // ASSIGN THE OUTPUT TO SPECIFIED SHEET"
     workbook.Sheets['TrelloData'] = output;
     // WRITE THE WORKBOOK BACK TO THE FILE
-    xlsx.writeFile(workbook, "./source.xlsx");
+    xlsx.writeFile(workbook, filename);
     //LET THE USER KNOW THAT EVERYTHING WORKED
     console.log(colors.green("    Workbook updated."));
 }
