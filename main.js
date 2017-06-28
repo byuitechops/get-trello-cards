@@ -1,15 +1,24 @@
 // Packages
-var Trello = require("node-trello");
-var _ = require("lodash");
-var fs = require("fs");
-var path = require("path");
-var dsv = require('d3-dsv');
-var xlsx = require('xlsx');
+const Trello = require("node-trello");
+const readline = require('readline');
+const _ = require("lodash");
+const fs = require("fs");
+const path = require("path");
+const colors = require('colors');
+//const dsv = require('d3-dsv');
+const xlsx = require('xlsx');
 /**********************************************************
  * READ THE BOARD IDs AND AUTHENTICATION DATA FROM SOURCE
  * XLS FILE "SETTINGS" TAB
  **********************************************************/
-var workbook = xlsx.readFile("./source.xlsx");
+
+var filename = process.argv[2];
+if (!process.argv[2]){
+    console.log('ARGUMENT MISSING: [path file]'.red);
+    console.log('    example: node main ./source.xlsx'.red);
+    return;
+}
+var workbook = xlsx.readFile(filename);
 var settings = workbook.Sheets['settings'];
 settings = xlsx.utils.sheet_to_json(settings);
 
@@ -36,7 +45,7 @@ var allcards = [];
  * data, flatten the cards into a readable format, then
  * output a CSV with all of the necessary information.
  **********************************************************/
-console.log("Grabbing trello cards from these boards: " + boardIds);
+console.log(colors.green("Grabbing trello cards from these boards: " + boardIds));
 _.forEach(boardIds, function (boardId) {
     var board = boardId; //used to get the board name for a readable export - may be unnecessary?
     var cards = {};
@@ -116,7 +125,7 @@ function stepThree() {
     // IF YOU WANT A CSV OF ALL THE CARDS, HERE'S HOW TO GET IT
     //allcards = (dsv.csvFormat(allcards, ['id', 'name', 'idList', 'closed', 'url', 'idMembers']));
     //fs.writeFileSync('./boards/allcards.csv', allcards);
-    
+
     // SET FILE OUTPUT TO THE ALL CARDS JSON
     var output = xlsx.utils.json_to_sheet(allcards);
     // console.log(output); // DOUBLE CHECK IF DESIRED
@@ -125,5 +134,5 @@ function stepThree() {
     // WRITE THE WORKBOOK BACK TO THE FILE
     xlsx.writeFile(workbook, "./source.xlsx");
     //LET THE USER KNOW THAT EVERYTHING WORKED
-    console.log("Workbook updated.");
+    console.log(colors.green("    Workbook updated."));
 }
